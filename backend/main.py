@@ -149,7 +149,7 @@ async def explain_concept(request: ExplainRequest):
             "Explain now:"
         )
 
-        response = qa_chain.run(prompt)
+        response = qa_chain({"query": prompt})
 
         return {"explanation": response}
     except Exception as e:
@@ -168,7 +168,7 @@ async def generate_quiz(body: QuizRequest):
         embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         vectorstore = Chroma(persist_directory=persist_path, embedding_function=embedding_model)
         retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 10})
-        llm = Ollama(model="llama3.2:1b")
+        llm = OllamaLLM(model="llama3.2:1b")
         qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
         # Retrieve content
@@ -225,7 +225,7 @@ async def generate_case_study(body: CaseStudyRequest):
         embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         vectorstore = Chroma(persist_directory=persist_path, embedding_function=embedding_model)
         retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 10})
-        llm = Ollama(model="llama3.2:1b")
+        llm = OllamaLLM(model="llama3.2:1b")
         qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
         # Retrieve relevant content (top 15 chunks)
@@ -269,7 +269,7 @@ async def generate_visualization(body: VisualizeRequest):
         vectorstore = Chroma(persist_directory=persist_path, embedding_function=embedding_model)
         retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
-        llm = Ollama(model="llama3.2:1b")
+        llm = OllamaLLM(model="llama3.2:1b")
         qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
         # Retrieve relevant docs (e.g. top 15)
