@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap');
+@import "tailwindcss";
+
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-video-blur {
+  filter: blur(3px);
+}
+
+.smooth-gradient {
+  background: linear-gradient(270deg, #c7d2fe, #e0e7ff, #cec9df);
+  background-size: 600% 600%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@theme {
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.141 0.005 285.823);
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.141 0.005 285.823);
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.141 0.005 285.823);
+  --color-primary: oklch(0.68 0.169 237.323);
+  --color-primary-foreground: oklch(0.971 0.013 17.38);
+  --color-secondary: oklch(0.967 0.001 286.375);
+  --color-secondary-foreground: oklch(0.21 0.006 285.885);
+  --color-muted: oklch(0.967 0.001 286.375);
+  --color-muted-foreground: oklch(0.552 0.016 285.938);
+  --color-accent: oklch(0.967 0.001 286.375);
+  --color-accent-foreground: oklch(0.21 0.006 285.885);
+  --color-destructive: oklch(0.645 0.246 16.439);
+  --color-destructive-foreground: oklch(0.971 0.013 17.38);
+  --color-border: oklch(0.92 0.004 286.32);
+  --color-input: oklch(0.92 0.004 286.32);
+  --color-ring: oklch(0.637 0.237 25.331);
+  --color-chart-1: oklch(0.646 0.222 41.116);
+  --color-chart-2: oklch(0.6 0.118 184.704);
+  --color-chart-3: oklch(0.398 0.07 227.392);
+  --color-chart-4: oklch(0.828 0.189 84.429);
+  --color-chart-5: oklch(0.769 0.188 70.08);
+  --color-sidebar: oklch(0.985 0 0);
+  --color-sidebar-foreground: oklch(0.141 0.005 285.823);
+  --color-sidebar-primary: oklch(0.637 0.237 25.331);
+  --color-sidebar-primary-foreground: oklch(0.971 0.013 17.38);
+  --color-sidebar-accent: oklch(0.967 0.001 286.375);
+  --color-sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+  --color-sidebar-border: oklch(0.92 0.004 286.32);
+  --color-sidebar-ring: oklch(0.637 0.237 25.331);
+}
+
+.btn {
+  @apply cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-white shadow hover:bg-primary/90 h-9 px-4 py-2;
+}
+
+/* Button Variants */
+.btn.destructive {
+  @apply bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90;
+}
+
+.btn.outline {
+  @apply text-foreground border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground;
+}
+
+.btn.secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.btn.ghost {
+  @apply text-muted-foreground bg-transparent shadow-none hover:bg-accent hover:text-accent-foreground;
+}
+
+.btn.link {
+  @apply shadow-none bg-transparent text-foreground underline-offset-4 hover:text-primary;
+}
+
+.gamesContainer {
+  background: linear-gradient(-45deg, #4c44e8, #23a6d5, #1caca2);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  box-shadow: 0 30px 50px -10px rgba(15, 73, 161, 0.467);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes collideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--start-x));
+  }
+  50% {
+    transform: translateX(0) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.collide-letter {
+  display: inline-block;
+  animation: collideIn 1s ease-out forwards;
+}
+
+.animate-gradientShift {
+  animation: gradientShift 10s ease infinite;
+}
