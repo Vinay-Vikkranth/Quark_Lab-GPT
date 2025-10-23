@@ -193,6 +193,8 @@ class CaseStudyRequest(BaseModel):
     # Optional prompt customization if needed
     prompt: Optional[str] = None
 
+# ---------------------------------------------------
+
 @app.post("/generate_case_study/")
 async def generate_case_study(body: CaseStudyRequest):
     try:
@@ -235,6 +237,8 @@ class VisualizeRequest(BaseModel):
 
 import json
 import re
+
+# ---------------------------------------------------
 
 @app.post("/generate_visualization/")
 async def generate_visualization(body: VisualizeRequest):
@@ -296,3 +300,4 @@ async def generate_visualization(body: VisualizeRequest):
 
     except Exception as e:
         return {"error": str(e)}
+
