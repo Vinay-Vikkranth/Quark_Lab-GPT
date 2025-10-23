@@ -2,8 +2,25 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRobot } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import mainVideo from "../../../assets/mainpage.mp4";
 
+// Define the examples array that was missing
+const examples = [
+  {
+    prompt: "Explain the concept of neural networks",
+    response:
+      "Neural networks are computing systems inspired by the biological neural networks in human brains. They consist of layers of interconnected nodes or 'neurons' that process information using weighted connections. As data flows through the network, each neuron applies an activation function to its inputs and passes the result to the next layer.",
+  },
+  {
+    prompt: "What is the difference between supervised and unsupervised learning?",
+    response:
+      "Supervised learning uses labeled training data to learn a mapping between inputs and outputs. Unsupervised learning works with unlabeled data to find patterns or structures. In supervised learning, the algorithm learns from examples with correct answers, while unsupervised learning discovers hidden patterns without guidance.",
+  },
+  {
+    prompt: "How do transformers work in NLP?",
+    response:
+      "Transformers are deep learning models that use self-attention mechanisms to process sequential data. Unlike RNNs, they process entire sequences at once rather than sequentially. The self-attention mechanism allows the model to weigh the importance of different words in relation to each other, regardless of their position in the sequence.",
+  },
+];
 
 export default function CTA() {
   const fullText =

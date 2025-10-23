@@ -118,41 +118,20 @@ async def explain_concept(request: ExplainRequest):
         llm = OllamaLLM(model="llama3.2:1b")
         qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
-        concept = request.concept
+        concept = (request.concept or "").strip()
+        # Build a concise instruction prompt. Let the retriever provide context.
         prompt = (
-            f"You are a patient teacher. Explain the concept '{concept}' "
-            "ONLY using the provided class notes. Do not add outside facts.\n\n"
-            "Please format your response in **clear Markdown** so it renders nicely.\n\n"
-            "## **What it is**\n"
-            "- One short paragraph definition.\n\n"
-            "## **Why it matters**\n"
-            "- Bullet 1\n"
-            "- Bullet 2\n"
-            "- Bullet 3\n\n"
-            "## **How it works**\n"
-            "1. Step 1\n"
-            "2. Step 2\n"
-            "3. Step 3 (add formulas or rules verbatim from the notes)\n\n"
-            "## **Examples**\n"
-            "- **Example 1:** inputs → process → result\n"
-            "- **Example 2:** (if available)\n\n"
-            "## **Common mistakes**\n"
-            "- Mistake 1\n"
-            "- Mistake 2\n"
-            "- Mistake 3\n\n"
-            "## **Quick check**\n"
-            "1. Question 1\n"
-            "2. Question 2\n"
-            "3. Question 3\n\n"
-            "Class Notes Context:\n"
-            "{retrieved_context}\n\n"
-            "Explain now:"
+            f"You are a patient teacher. Explain the concept '{concept}' ONLY using the provided class notes. "
+            "Do not add outside facts. Format your response in clear Markdown with sections: "
+            "What it is, Why it matters, How it works, Examples, Common mistakes, Quick check."
         )
 
-        response = qa_chain({"query": prompt})
+        # Use .run(...) to obtain a plain text answer (string) suitable for JSON responses
+        response_text = qa_chain.run(prompt)
 
-        return {"explanation": response}
+        return {"explanation": response_text}
     except Exception as e:
+        print("explain_concept error:", str(e))
         return {"error": str(e)}
 
 # ---------------------------------------------------
