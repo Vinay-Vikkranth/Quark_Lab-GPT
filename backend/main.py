@@ -163,11 +163,15 @@ async def generate_quiz(body: QuizRequest):
 
         prompt = (
             f"Create a {question_count}-question multiple-choice quiz based ONLY on the provided content.\n"
-            "The quiz should be in three categories of difficulty: easy,moderate and hard"
-            "Format the output in clean **Markdown** so each question and its options are on separate lines.\n\n"
+            "The quiz should be in three categories of difficulty: easy, moderate, and hard.\n"
+            "First, list all questions with their options. Do NOT mark correct answers inline.\n"
+            "Format the questions in clean **Markdown** so each question and its options are on separate lines.\n\n"
             "Each question should be numbered `1.`, `2.`, etc.\n"
-            "Each option should be labeled `A)`, `B)`, `C)`, `D)` **on its own line**.\n"
-            "Mark the correct option by adding `(Correct)` immediately after it.\n\n"
+            "Each option should be labeled `A)`, `B)`, `C)`, `D)` on its own line.\n\n"
+            "After all questions have been listed, include an `Answers:` section that maps each question to its correct option, for example:\n"
+            "`Answers:`\n"
+            "`Q1) A`\n"
+            "`Q2) C`\n\n"
             f"Content:\n{combined_text}\n\n"
             "Quiz:\n"
         )
