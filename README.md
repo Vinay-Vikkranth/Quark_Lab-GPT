@@ -32,3 +32,4 @@ or .venv\Scripts\Activate.ps1
 2.cd backend
 3.pip show python-multipart 4. pip install fastapi uvicorn python-multipart
 5.uvicorn main:app --reload
+(or) python run.py
